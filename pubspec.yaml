@@ -51,6 +51,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   http: ^0.13.4
+  idb_shim: ^2.3.0+2
   image_picker: ^0.8.4+8
   intl: any
   just_audio: ^0.9.30
@@ -75,6 +76,9 @@ dependencies:
   share_plus: ^7.0.0
   shared_preferences: 2.0.15 # Pinned because https://github.com/flutter/flutter/issues/118401
   slugify: ^2.0.0
+  sqflite: ^2.2.8+2
+  sqflite_common_ffi: ^2.2.5
+  sqflite_sqlcipher: ^2.1.1+1
   swipe_to_action: ^0.2.0
   tor_detector_web: ^1.1.0
   uni_links: ^0.5.1
@@ -186,3 +190,7 @@ dependency_overrides:
       url: https://github.com/timsneath/wakelock.git
       ref: 2a9bca63a540771f241d688562351482b2cf234c
       path: wakelock_windows
+  matrix:
+    git:
+      url: https://gitlab.com/famedly/company/frontend/famedlysdk.git
+      ref: krille/new-fluffybox
