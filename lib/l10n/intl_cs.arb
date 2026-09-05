@@ -2340,90 +2340,54 @@
         }
     },
     "commandHint_roomupgrade": "Aktualizovat místnost na danou verzi",
-    "@goToSpace": {
+    "editImage": "Upravit obraz",
+    "@editImage": {
         "type": "String",
-        "space": {}
+        "placeholders": {}
     },
-    "@countReplies": {
-        "type": "int",
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "@userLevel": {
+    "rotateLeft": "Otočit doleva",
+    "@rotateLeft": {
         "type": "String",
-        "placeholders": {
-            "level": {
-                "type": "int"
-            }
-        }
+        "placeholders": {}
     },
-    "@updateInstalled": {
+    "rotateRight": "Otočit doprava",
+    "@rotateRight": {
         "type": "String",
-        "placeholders": {
-            "version": {
-                "type": "String"
-            }
-        }
+        "placeholders": {}
     },
-    "@adminLevel": {
+    "mirror": "Zrcadlit",
+    "@mirror": {
         "type": "String",
-        "placeholders": {
-            "level": {
-                "type": "int"
-            }
-        }
+        "placeholders": {}
     },
-    "@mute": {
-        "description": "This should be a very short string because there is not much space in the button!"
-    },
-    "@thereAreCountUsersBlocked": {
+    "save": "Uložit",
+    "@save": {
         "type": "String",
-        "count": {}
+        "placeholders": {}
     },
-    "@unknownPushRule": {
+    "draw": "Kreslit",
+    "@draw": {
         "type": "String",
-        "placeholders": {
-            "rule": {
-                "type": "String"
-            }
-        }
+        "placeholders": {}
     },
-    "@unreadChatsInApp": {
+    "undo": "Vrátit",
+    "@undo": {
         "type": "String",
-        "placeholders": {
-            "appname": {
-                "type": "String"
-            },
-            "unread": {
-                "type": "String"
-            }
-        }
+        "placeholders": {}
     },
-    "@countVotes": {
-        "type": "int",
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "@moderatorLevel": {
+    "clear": "Vymazat",
+    "@clear": {
         "type": "String",
-        "placeholders": {
-            "level": {
-                "type": "int"
-            }
-        }
+        "placeholders": {}
     },
-    "@searchIn": {
+    "accountsAndSettings": "Úcty a nastavení",
+    "@accountsAndSettings": {
         "type": "String",
-        "placeholders": {
-            "chat": {
-                "type": "String"
-            }
-        }
-    }
+        "placeholders": {}
+    },
+    "compressingVideo": "Kompresuji video...",
+    "searchMore": "Vyhledat více...",
+    "incomingMessages": "Příchozí zprávy",
+    "stickers": "Samolepky",
+    "discover": "Objevit"
 }
