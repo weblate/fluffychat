@@ -2773,7 +2773,7 @@
     },
     "compressingVideo": "Comprimindo o vídeo…",
     "shareCrashReports": "Compartir informe dos fallos",
-    "shareCrashReportsDescription": "Compartir de xeito automático coas desenvolvedoras os informes dos fallos",
+    "shareCrashReportsDescription": "Compartir automaticamente coas desenvolvedoras os informes dos fallos?",
     "countActiveCallMembers": "{count} participantes na chamada activa",
     "@countActiveCallMembers": {
         "placeholders": {
@@ -2784,5 +2784,45 @@
     },
     "enterCall": "Entrar na chamada",
     "videoCallsBetaWarning": "As chamadas de vídeo son unha función en probas. Podería haber fallos ou comportamentos non agardados. Apreciamos que nos contes que tal funcionan.",
-    "noDevicesFound": "Non se atopan dispositivos"
+    "noDevicesFound": "Non se atopan dispositivos",
+    "accountsAndSettings": "Contas e axustes",
+    "@accountsAndSettings": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "incomingCall": "Chamada entrante",
+    "videoCall": "Chamada de vídeo",
+    "voiceCall": "Chamada de voz",
+    "missedCall": "Chamada perdida",
+    "callBack": "Devolver chamada",
+    "hangUp": "Responder",
+    "waitingForParticipant": "Agardando por participante…",
+    "decline": "Rexeitar",
+    "startCall": "Chamar",
+    "selectCamera": "Seleccionar cámara",
+    "selectMicrophone": "Seleccionar micrófono",
+    "selectSpeaker": "Seleccionar altofalante",
+    "toggleMicrophone": "Activación do micrófono",
+    "toggleCamera": "Activación da cámara",
+    "startScreensharing": "Iniciar a compartir pantalla",
+    "stopScreensharing": "Deixar de compartir pantalla",
+    "raiseHand": "Erguer a man",
+    "stopRaiseHand": "Baixar a man",
+    "preferSpeaker": "Preferir altofalante",
+    "unexpectedErrorOccurded": "Por desgraza, houbo un fallo co que non contabamos: {msg}",
+    "@unexpectedErrorOccurded": {
+        "placeholders": {
+            "msg": {
+                "type": "String"
+            }
+        }
+    },
+    "incomingCallFrom": "Recibindo unha chamada de {user}",
+    "@incomingCallFrom": {
+        "placeholders": {
+            "user": {
+                "type": "String"
+            }
+        }
+    }
 }
