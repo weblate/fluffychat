@@ -2825,5 +2825,13 @@
                 "type": "String"
             }
         }
+    },
+    "serverRespondedWithError": "Le serveur a répondu avec un message d'erreur : {error}",
+    "@serverRespondedWithError": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
     }
 }
