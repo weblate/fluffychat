@@ -7,8 +7,8 @@ import 'package:fluffychat/l10n/l10n.dart';
 import 'package:fluffychat/pages/settings_password/settings_password_view.dart';
 import 'package:fluffychat/utils/localized_exception_extension.dart';
 import 'package:fluffychat/widgets/matrix.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsPassword extends StatefulWidget {
   const SettingsPassword({super.key});
@@ -31,6 +31,7 @@ class SettingsPasswordController extends State<SettingsPassword> {
   Future<void> changePassword() async {
     final l10n = L10n.of(context);
     final scaffoldMessenger = ScaffoldMessenger.of(context);
+    final theme = Theme.of(context);
     setState(() {
       oldPasswordError = newPassword1Error = newPassword2Error = null;
     });
@@ -68,12 +69,15 @@ class SettingsPasswordController extends State<SettingsPassword> {
       );
       if (mounted) context.pop();
     } catch (e) {
-      setState(() {
-        newPassword2Error = e.toLocalizedString(
-          context,
-          ExceptionContext.changePassword,
-        );
-      });
+      scaffoldMessenger.showSnackBar(
+        SnackBar(
+          backgroundColor: theme.colorScheme.error,
+          content: Text(
+            e.toLocalizedString(context),
+            style: TextStyle(color: theme.colorScheme.onError),
+          ),
+        ),
+      );
     } finally {
       setState(() {
         loading = false;

@@ -4,14 +4,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 import 'package:file_picker/file_picker.dart';
-import 'package:fluffychat/l10n/l10n.dart';
 import 'package:fluffychat/utils/error_reporter.dart';
 import 'package:fluffychat/utils/localized_exception_extension.dart';
 import 'package:fluffychat/utils/platform_infos.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:matrix/encryption.dart';
 import 'package:matrix/matrix.dart';
 
@@ -155,6 +154,7 @@ class BootstrapViewModel extends ValueNotifier<BootstrapViewModelState> {
         wipeCrossSigning: !reset,
         wipeKeyBackup: !reset,
         wipeSecureStorage: !reset,
+        setupOnlineKeyBackup: !reset,
         setupMasterKey: !reset,
         setupSelfSigningKey: !reset,
         setupUserSigningKey: !reset,
@@ -237,17 +237,6 @@ class BootstrapViewModel extends ValueNotifier<BootstrapViewModelState> {
         );
       }
     }
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        duration: Duration(seconds: 5),
-        showCloseIcon: true,
-        backgroundColor: Colors.green.shade700,
-        content: Text(
-          L10n.of(context).youAreReadyToStart,
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-    );
     context.go('/rooms');
   }
 

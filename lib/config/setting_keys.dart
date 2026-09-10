@@ -9,6 +9,7 @@ import 'package:async/async.dart';
 import 'package:fluffychat/utils/platform_infos.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:managed_configurations/managed_configurations.dart';
 import 'package:matrix/matrix_api_lite/utils/logs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,7 +17,7 @@ enum AppSettings<T> {
   textMessageMaxLength<int>('textMessageMaxLength', 16384),
 
   /// Max lines for unselected HTML/text bubbles; 0 = unlimited (no fade).
-  messagePreviewMaxLines<int>('chat.fluffy.message_preview_max_lines', 25),
+  messagePreviewMaxLines<int>('chat.fluffy.message_preview_max_lines', 50),
   audioRecordingNumChannels<int>('audioRecordingNumChannels', 1),
   audioRecordingAutoGain<bool>('audioRecordingAutoGain', true),
   audioRecordingEchoCancel<bool>('audioRecordingEchoCancel', false),
@@ -44,7 +45,6 @@ enum AppSettings<T> {
   swipeRightToLeftToReply<bool>('chat.fluffy.swipeRightToLeftToReply', true),
   sendOnEnter<bool>('chat.fluffy.send_on_enter', false),
   displayNavigationRail<bool>('chat.fluffy.display_navigation_rail', false),
-  experimentalVoip<bool>('chat.fluffy.experimental_voip', false),
   shareKeysWith<String>('chat.fluffy.share_keys_with_2', 'all'),
   noEncryptionWarningShown<bool>(
     'chat.fluffy.no_encryption_warning_shown',
@@ -57,8 +57,8 @@ enum AppSettings<T> {
   // colorSchemeSeed stored as ARGB int
   colorSchemeSeedInt<int>('chat.fluffy.color_scheme_seed', 0xFF5625BA),
   emojiSuggestionLocale<String>('emoji_suggestion_locale', ''),
-  enableSoftLogout<bool>('chat.fluffy.enable_soft_logout', false),
-  enableMatrixNativeOIDC<bool>('chat.fluffy.enable_matrix_native_oidc', false),
+  enableSoftLogout<bool>('chat.fluffy.enable_soft_logout', true),
+  enableMatrixNativeOIDC<bool>('chat.fluffy.enable_matrix_native_oidc', true),
   presetHomeserver<String>('chat.fluffy.preset_homeserver', ''),
   welcomeText<String>('chat.fluffy.welcome_text', ''),
   website<String>('chat.fluffy.website_url', 'https://fluffychat.im'),
@@ -78,15 +78,26 @@ enum AppSettings<T> {
   showThumbnailsInTimeline<bool>('chat.fluffy.showThumbnailsInTimeline', true),
   doubleTapToReact<bool>('chat.fluffy.double_tap_to_react', false),
   doubleTapReaction<String>('chat.fluffy.double_tap_reaction', '❤️'),
-  benchmarksInLogs<bool>('chat.fluffy.benchmarks_in_logs', false);
+  benchmarksInLogs<bool>('chat.fluffy.benchmarks_in_logs', false),
+  autoSendErrorReports<bool?>('chat.fluffy.auto_send_eror_reports', null),
+  knownErrorHashes<List<String>>('chat.fluffy.known_crash_hashes', []),
+  customLiveKitInstance<String>('chat.fluffy.custom_live_kit_instance', '');
 
   final String key;
-  final T defaultValue;
+  final T _defaultValue;
 
-  const AppSettings(this.key, this.defaultValue);
+  const AppSettings(this.key, this._defaultValue);
 
   static SharedPreferences get store => _store!;
   static SharedPreferences? _store;
+
+  static Map<String, Object?>? _platformConfiguration;
+
+  T get defaultValue {
+    final platformConfig = _platformConfiguration?[name];
+    if (platformConfig is T) return platformConfig;
+    return _defaultValue;
+  }
 
   static Future<void> reset({bool loadWebConfigFile = true}) async {
     await AppSettings._store!.clear();
@@ -120,30 +131,18 @@ enum AppSettings<T> {
         PlatformInfos.isMobile,
       );
     }
-    if (kIsWeb && loadWebConfigFile) {
+
+    // Load configuration from config.json file or MDM:
+    if (PlatformInfos.isMobile) {
+      _platformConfiguration =
+          await ManagedConfigurations().getManagedConfigurations;
+    } else if (kIsWeb && loadWebConfigFile) {
       try {
         final configJsonString = utf8.decode(
           (await http.get(Uri.parse('config.json'))).bodyBytes,
         );
-        final configJson =
+        _platformConfiguration =
             json.decode(configJsonString) as Map<String, Object?>;
-        for (final setting in AppSettings.values) {
-          if (store.get(setting.key) != null) continue;
-          final configValue = configJson[setting.name];
-          if (configValue == null) continue;
-          if (configValue is bool) {
-            await store.setBool(setting.key, configValue);
-          }
-          if (configValue is String) {
-            await store.setString(setting.key, configValue);
-          }
-          if (configValue is int) {
-            await store.setInt(setting.key, configValue);
-          }
-          if (configValue is double) {
-            await store.setDouble(setting.key, configValue);
-          }
-        }
       } on FormatException catch (_) {
         Logs().v('[ConfigLoader] config.json not found');
       } catch (e) {
@@ -153,6 +152,23 @@ enum AppSettings<T> {
 
     return store;
   }
+}
+
+extension AppSettingsBoolNExtension on AppSettings<bool?> {
+  bool? get value {
+    final value = Result(() => AppSettings.store.getBool(key));
+    final error = value.asError;
+    if (error != null) {
+      Logs().e(
+        'Unable to fetch $key from storage. Removing entry...',
+        error.error,
+        error.stackTrace,
+      );
+    }
+    return value.asValue?.value;
+  }
+
+  Future<void> setItem(bool value) => AppSettings.store.setBool(key, value);
 }
 
 extension AppSettingsBoolExtension on AppSettings<bool> {
@@ -221,4 +237,22 @@ extension AppSettingsDoubleExtension on AppSettings<double> {
   }
 
   Future<void> setItem(double value) => AppSettings.store.setDouble(key, value);
+}
+
+extension AppSettingsStringListExtension on AppSettings<List<String>> {
+  List<String> get value {
+    final value = Result(() => AppSettings.store.getStringList(key));
+    final error = value.asError;
+    if (error != null) {
+      Logs().e(
+        'Unable to fetch $key from storage. Removing entry...',
+        error.error,
+        error.stackTrace,
+      );
+    }
+    return value.asValue?.value ?? defaultValue;
+  }
+
+  Future<void> setItem(List<String> value) =>
+      AppSettings.store.setStringList(key, value);
 }

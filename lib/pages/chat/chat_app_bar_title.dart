@@ -12,8 +12,8 @@ import 'package:fluffychat/utils/sync_status_localization.dart';
 import 'package:fluffychat/utils/verified_room_extension.dart';
 import 'package:fluffychat/widgets/avatar.dart';
 import 'package:fluffychat/widgets/presence_builder.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:matrix/matrix.dart';
 
 class ChatAppBarTitle extends StatelessWidget {
@@ -55,6 +55,7 @@ class ChatAppBarTitle extends StatelessWidget {
           const SizedBox(width: 12),
           Expanded(
             child: Column(
+              mainAxisSize: .min,
               crossAxisAlignment: .start,
               children: [
                 Row(
@@ -97,43 +98,28 @@ class ChatAppBarTitle extends StatelessWidget {
                                 ? PresenceBuilder(
                                     userId: room.directChatMatrixID,
                                     builder: (context, presence) {
-                                      final statusMessage = presence?.statusMsg;
+                                      final statusMessage = presence?.statusMsg
+                                          ?.trim();
 
                                       final lastActiveTimestamp =
                                           presence?.lastActiveTimestamp;
 
-                                      return Row(
-                                        children: [
-                                          if (presence?.currentlyActive == true)
-                                            Text(
-                                              L10n.of(context).currentlyActive,
-                                              style: style,
-                                            )
-                                          else if (lastActiveTimestamp != null)
-                                            Text(
-                                              L10n.of(context).lastActiveAgo(
-                                                lastActiveTimestamp
-                                                    .localizedTimeShort(
-                                                      context,
-                                                    ),
-                                              ),
-                                              style: style,
-                                            ),
-                                          if (statusMessage != null) ...[
-                                            if ((presence?.currentlyActive ==
-                                                    true ||
-                                                lastActiveTimestamp != null))
-                                              Text(' ◦ ', style: style),
-                                            Expanded(
-                                              child: Text(
-                                                statusMessage,
-                                                style: style,
-                                                maxLines: 1,
-                                              ),
-                                            ),
-                                          ],
-                                        ],
-                                      );
+                                      final texts = [
+                                        if (presence?.currentlyActive == true)
+                                          L10n.of(context).currentlyActive
+                                        else if (lastActiveTimestamp != null)
+                                          L10n.of(context).lastActiveAgo(
+                                            lastActiveTimestamp
+                                                .localizedTimeShort(context),
+                                          ),
+                                        ?statusMessage,
+                                      ];
+                                      final text = texts.join(' ◦ ');
+                                      if (text.isEmpty) {
+                                        return const SizedBox.shrink();
+                                      }
+
+                                      return Text(text, style: style);
                                     },
                                   )
                                 : Row(

@@ -9,12 +9,11 @@ import 'package:fluffychat/l10n/l10n.dart';
 import 'package:fluffychat/pages/new_private_chat/new_private_chat.dart';
 import 'package:fluffychat/utils/localized_exception_extension.dart';
 import 'package:fluffychat/utils/platform_infos.dart';
-import 'package:fluffychat/utils/url_launcher.dart';
 import 'package:fluffychat/widgets/avatar.dart';
 import 'package:fluffychat/widgets/layouts/max_width_body.dart';
 import 'package:fluffychat/widgets/matrix.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:matrix/matrix.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 
@@ -37,15 +36,6 @@ class NewPrivateChatView extends StatelessWidget {
         leading: const Center(child: BackButton()),
         title: Text(L10n.of(context).newChat),
         backgroundColor: theme.scaffoldBackgroundColor,
-        actions: [
-          TextButton(
-            onPressed: UrlLauncher(
-              context,
-              AppConfig.startChatTutorial,
-            ).launchUrl,
-            child: Text(L10n.of(context).help),
-          ),
-        ],
       ),
       body: MaxWidthBody(
         withScrolling: false,

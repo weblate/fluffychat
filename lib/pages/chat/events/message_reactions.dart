@@ -9,7 +9,7 @@ import 'package:fluffychat/widgets/avatar.dart';
 import 'package:fluffychat/widgets/future_loading_dialog.dart';
 import 'package:fluffychat/widgets/matrix.dart';
 import 'package:fluffychat/widgets/mxc_image.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:matrix/matrix.dart';
 
 class MessageReactions extends StatelessWidget {
@@ -108,28 +108,12 @@ class _Reaction extends StatelessWidget {
 
     Widget content;
     if (reactionKey.startsWith('mxc://')) {
-      content = Row(
-        mainAxisSize: .min,
-        children: <Widget>[
-          MxcImage(
-            uri: Uri.parse(reactionKey),
-            width: 20,
-            height: 20,
-            animated: false,
-            isThumbnail: false,
-          ),
-          if (count > 1) ...[
-            const SizedBox(width: 4),
-            Text(
-              count.toString(),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: theme.colorScheme.onSurface,
-                fontSize: DefaultTextStyle.of(context).style.fontSize,
-              ),
-            ),
-          ],
-        ],
+      content = MxcImage(
+        uri: Uri.parse(reactionKey),
+        width: 20,
+        height: 20,
+        animated: false,
+        isThumbnail: false,
       );
     } else {
       var renderKey = Characters(reactionKey);

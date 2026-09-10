@@ -7,8 +7,8 @@ import 'package:async/async.dart';
 import 'package:fluffychat/l10n/l10n.dart';
 import 'package:fluffychat/widgets/avatar.dart';
 import 'package:fluffychat/widgets/matrix.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:matrix/matrix.dart' hide Result;
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -181,7 +181,7 @@ class ClientChooserButton extends StatelessWidget {
         color: Colors.transparent,
         child: PopupMenuButton<Object>(
           key: Key('accounts_and_settings_buttons'),
-          tooltip: 'Accounts and settings',
+          tooltip: L10n.of(context).accountsAndSettings,
           onSelected: (o) => _clientSelected(o, context),
           itemBuilder: _bundleMenuItems,
           icon: Avatar(
@@ -213,7 +213,7 @@ class ClientChooserButton extends StatelessWidget {
           break;
         case SettingsAction.support:
           launchUrlString(
-            'https://fluffychat.im/faq/#how_can_i_support_fluffychat',
+            'https://ko-fi.com/post/How-can-I-support-FluffyChat-J2G325WE6I',
           );
           break;
         case SettingsAction.settings:

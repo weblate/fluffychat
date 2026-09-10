@@ -8,9 +8,9 @@ import 'dart:math';
 
 import 'package:fluffychat/l10n/l10n.dart';
 import 'package:fluffychat/utils/other_party_can_receive.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:matrix/encryption.dart';
 import 'package:matrix/matrix.dart';
 
@@ -56,7 +56,9 @@ extension LocalizedExceptionExtension on Object {
           if (exceptionContext == ExceptionContext.joinRoom) {
             return L10n.of(context).unableToJoinChat;
           }
-          return (this as MatrixException).errorMessage;
+          return L10n.of(
+            context,
+          ).serverRespondedWithError((this as MatrixException).errorMessage);
       }
     }
     if (this is InvalidPassphraseException) {
@@ -107,8 +109,7 @@ extension LocalizedExceptionExtension on Object {
       return L10n.of(context).unableToJoinChat;
     }
 
-    Logs().w('Something went wrong: ', this);
-    return L10n.of(context).oopsSomethingWentWrong;
+    return L10n.of(context).unexpectedErrorOccurded(toString());
   }
 }
 

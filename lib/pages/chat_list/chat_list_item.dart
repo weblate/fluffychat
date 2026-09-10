@@ -5,14 +5,16 @@
 
 import 'package:fluffychat/config/app_config.dart';
 import 'package:fluffychat/l10n/l10n.dart';
+import 'package:fluffychat/pages/chat_list/active_call_indicator.dart';
 import 'package:fluffychat/pages/chat_list/unread_bubble.dart';
+import 'package:fluffychat/utils/matrix_live_kit_calls/matrix_live_kit_call.dart';
 import 'package:fluffychat/utils/matrix_sdk_extensions/matrix_locals.dart';
 import 'package:fluffychat/utils/room_status_extension.dart';
 import 'package:fluffychat/widgets/adaptive_dialogs/show_ok_cancel_alert_dialog.dart';
 import 'package:fluffychat/widgets/future_loading_dialog.dart';
 import 'package:fluffychat/widgets/hover_builder.dart';
 import 'package:fluffychat/widgets/typing_animation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:matrix/matrix.dart';
 
 import '../../config/themes.dart';
@@ -241,9 +243,12 @@ class ChatListItem extends StatelessWidget {
                 ],
               ),
               subtitle: Row(
-                crossAxisAlignment: .start,
-                mainAxisAlignment: .center,
-                children: <Widget>[
+                children: [
+                  if (room.hasActiveMatrixRtcCall)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 4.0),
+                      child: ActiveCallIndicator(room: room),
+                    ),
                   if (typingText.isEmpty &&
                       ownMessage &&
                       room.lastEvent?.status.isSending == true) ...[

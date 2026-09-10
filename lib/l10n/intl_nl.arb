@@ -489,7 +489,7 @@
             }
         }
     },
-    "countParticipants": "{count} personen",
+    "countParticipants": "{count, plural, =1{1 persoon} other{{count} personen}}",
     "@countParticipants": {
         "type": "String",
         "placeholders": {
@@ -659,7 +659,7 @@
         "type": "String",
         "placeholders": {}
     },
-    "endedTheCall": "{senderName} heeft het gesprek beëindigd",
+    "endedTheCall": "{senderName} heeft de oproep beëindigd",
     "@endedTheCall": {
         "type": "String",
         "placeholders": {
@@ -826,7 +826,7 @@
             }
         }
     },
-    "isTyping": "is aan het typen…",
+    "isTyping": "is aan het typen",
     "@isTyping": {
         "type": "String",
         "placeholders": {}
@@ -1097,7 +1097,7 @@
         "type": "String",
         "placeholders": {}
     },
-    "participant": "Personen",
+    "participant": "Deelnemer",
     "@participant": {
         "type": "String",
         "placeholders": {}
@@ -1412,7 +1412,7 @@
         "type": "String",
         "placeholders": {}
     },
-    "startedACall": "{senderName} heeft een gesprek gestart",
+    "startedACall": "{senderName} heeft een oproep gestart",
     "@startedACall": {
         "type": "String",
         "placeholders": {
@@ -1586,11 +1586,6 @@
         "type": "String",
         "placeholders": {}
     },
-    "videoCall": "Videogesprek",
-    "@videoCall": {
-        "type": "String",
-        "placeholders": {}
-    },
     "visibilityOfTheChatHistory": "Chatgeschiedenis zichtbaarheid",
     "@visibilityOfTheChatHistory": {
         "type": "String",
@@ -1738,13 +1733,9 @@
     },
     "pinMessage": "Maak vast aan chat",
     "emojis": "Emoji's",
-    "placeCall": "Bellen",
     "unsupportedAndroidVersion": "Niet-ondersteunde Android-versie",
     "unsupportedAndroidVersionLong": "Voor deze functie is een nieuwe Android-versie verplicht. Controleer je updates of Lineage OS-ondersteuning.",
-    "videoCallsBetaWarning": "Houd er rekening mee dat videogesprekken momenteel in bèta zijn. Ze werken misschien niet zoals je verwacht of werken niet op alle platformen.",
-    "voiceCall": "Spraakgesprek",
     "confirmEventUnpin": "Weet je zeker dat je de gebeurtenis definitief wilt losmaken?",
-    "experimentalVideoCalls": "Videogesprekken (experimenteel)",
     "youAcceptedTheInvitation": "👍 Je hebt de uitnodiging geaccepteerd",
     "youRejectedTheInvitation": "Je hebt de uitnodiging afgewezen",
     "youJoinedTheChat": "Je bent toegetreden tot de chat",
@@ -1980,7 +1971,7 @@
     "blockedUsers": "Geblokkeerde personen",
     "searchChatsRooms": "Zoek #chats, @personen...",
     "swipeRightToLeftToReply": "Veeg van rechts naar links om te reageren",
-    "calls": "Gesprekken",
+    "calls": "Oproepen",
     "customEmojisAndStickers": "Aangepaste emoji's en stickers",
     "accessAndVisibilityDescription": "Wie mag toetreden tot deze chat en hoe de chat ontdekt kan worden.",
     "customEmojisAndStickersBody": "Voeg toe of deel aangepaste emoji's en stickers die in elke chat gebruikt kunnen worden.",
@@ -2177,7 +2168,7 @@
     "sendTypingNotificationsDescription": "Andere deelnemers in de chat kunnen zien wanneer je een bericht aan het typen bent.",
     "sendCanceled": "Versturen geannuleerd",
     "opacity": "Doorzichtigheid:",
-    "verifyOtherUserDescription": "Als je een persoon verifieert ben je er zeker van dat je echt met haar contact hebt. 💪\n\nWanneer je een verificatie start ziet de persoon een popup in de app. Hier staat een serie van emoji's of getallen die je met elkaar moet vergelijken.\n\nDe beste manier om dit te doen is in persoon of met een videogesprek. 👭",
+    "verifyOtherUserDescription": "Als je een persoon verifieert ben je er zeker van dat je echt met haar contact hebt. 💪\n\nWanneer je een verificatie start ziet de persoon een popup in de app. Hier staat een serie van emoji's of getallen die je met elkaar moet vergelijken.\n\nDe beste manier om dit te doen is in persoon of met een video oproep. 👭",
     "changeTheVisibilityOfChatHistory": "Zichtbaarheid van de chat-geschiedenis wijzigen",
     "sendRoomNotifications": "@room-meldingen versturen",
     "noticeChatBackupDeviceVerification": "Opmerking: Als al je apparaten zijn verbonden met de chat back-up worden ze automatisch geverifieerd.",
@@ -2710,6 +2701,126 @@
         "placeholders": {
             "count": {
                 "type": "int"
+            }
+        }
+    },
+    "editImage": "Afbeelding wijzigen",
+    "@editImage": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "rotateLeft": "Linksom draaien",
+    "@rotateLeft": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "rotateRight": "Rechtsom draaien",
+    "@rotateRight": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "mirror": "Spiegelen",
+    "@mirror": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "save": "Opslaan",
+    "@save": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "draw": "Tekenen",
+    "@draw": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "undo": "Herstel",
+    "@undo": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "clear": "Ongedaan maken",
+    "@clear": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "eraser": "Gummen",
+    "@eraser": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "crop": "Bijsnijden",
+    "@crop": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "loadingMessages": "Berichten laden...",
+    "buildDoesNotSupportFirebase": "Deze versie ondersteunt geen firebase cloud messaging.",
+    "unableToRegisterDeviceForFirebase": "Niet in staat om het apparaat te registreren voor firebase cloud messaging.",
+    "unifiedPushDistributors": "Unified Push diensten:",
+    "accountsAndSettings": "Accounts en instellingen",
+    "@accountsAndSettings": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "sendingFilesDoNotExit": "{count} bestanden sturen... Even geduld ajb!",
+    "@sendingFilesDoNotExit": {
+        "type": "String",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "compressingVideo": "Video comprimeren...",
+    "doubleTapToReact": "Dubbele tik om te reageren",
+    "doubleTapToReactDescription": "Dubbele tik op een bericht om te reageren of tekst te selecteren",
+    "doubleTapReaction": "Dubbele tik reactie",
+    "shareCrashReports": "Foutmeldingen delen",
+    "shareCrashReportsDescription": "Automatisch foutmeldingen delen met de ontwikkelaars?",
+    "countActiveCallMembers": "{count} actieve oproep deelnemers",
+    "@countActiveCallMembers": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "enterCall": "Oproep opnemen",
+    "videoCallsBetaWarning": "Video oproepen zijn een beta functie. Er zijn mogelijk fouten of onverwachte reacties. We horen graag je feedback.",
+    "noDevicesFound": "Geen apparaten gevonden",
+    "incomingCall": "Inkomende oproep",
+    "videoCall": "Video oproepen",
+    "voiceCall": "Spraakoproep",
+    "missedCall": "Oproep gemist",
+    "callBack": "Terugbellen",
+    "hangUp": "Ophangen",
+    "waitingForParticipant": "Wachten op deelnemer...",
+    "decline": "Weigeren",
+    "startCall": "Start een oproep",
+    "selectCamera": "Camera selecteren",
+    "selectMicrophone": "Microfoon selecteren",
+    "selectSpeaker": "Speaker selecteren",
+    "toggleMicrophone": "Microfoon aan/uit",
+    "toggleCamera": "Camera aan/uit",
+    "startScreensharing": "Schermdelen starten",
+    "stopScreensharing": "Schermdelen stoppen",
+    "raiseHand": "Hand opsteken",
+    "stopRaiseHand": "Hand omlaag",
+    "preferSpeaker": "Voorkeur aan speaker",
+    "unexpectedErrorOccurded": "Helaas is er een onverwachte fout opgetreden: {msg}",
+    "@unexpectedErrorOccurded": {
+        "placeholders": {
+            "msg": {
+                "type": "String"
+            }
+        }
+    },
+    "incomingCallFrom": "Inkomende oproep van {user}",
+    "@incomingCallFrom": {
+        "placeholders": {
+            "user": {
+                "type": "String"
             }
         }
     }

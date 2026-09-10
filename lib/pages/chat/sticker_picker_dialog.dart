@@ -7,18 +7,20 @@ import 'package:fluffychat/config/app_config.dart';
 import 'package:fluffychat/l10n/l10n.dart';
 import 'package:fluffychat/utils/url_launcher.dart';
 import 'package:fluffychat/widgets/mxc_image.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:matrix/matrix.dart';
 
 import '../../widgets/avatar.dart';
 
 class StickerPickerDialog extends StatefulWidget {
   final Room room;
+  final ImagePackUsage usage;
   final void Function(ImagePackImageContent) onSelected;
 
   const StickerPickerDialog({
     required this.onSelected,
     required this.room,
+    this.usage = ImagePackUsage.sticker,
     super.key,
   });
 
@@ -33,7 +35,7 @@ class StickerPickerDialogState extends State<StickerPickerDialog> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    final stickerPacks = widget.room.getImagePacks(ImagePackUsage.sticker);
+    final stickerPacks = widget.room.getImagePacks(widget.usage);
     final packSlugs = stickerPacks.keys.toList();
 
     return Material(

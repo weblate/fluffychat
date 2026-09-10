@@ -92,6 +92,11 @@
         "type": "String",
         "placeholders": {}
     },
+    "accountsAndSettings": "Accounts and settings",
+    "@accountsAndSettings": {
+        "type": "String",
+        "placeholders": {}
+    },
     "activatedEndToEndEncryption": "🔐 {username} activated end to end encryption",
     "@activatedEndToEndEncryption": {
         "type": "String",
@@ -1814,11 +1819,6 @@
         "type": "String",
         "placeholders": {}
     },
-    "videoCall": "Video call",
-    "@videoCall": {
-        "type": "String",
-        "placeholders": {}
-    },
     "visibilityOfTheChatHistory": "Visibility of the chat history",
     "@visibilityOfTheChatHistory": {
         "type": "String",
@@ -1936,12 +1936,8 @@
     "pinMessage": "Pin to room",
     "confirmEventUnpin": "Are you sure to permanently unpin the event?",
     "emojis": "Emojis",
-    "placeCall": "Place call",
-    "voiceCall": "Voice call",
     "unsupportedAndroidVersion": "Unsupported Android version",
     "unsupportedAndroidVersionLong": "This feature requires a newer Android version. Please check for updates or Lineage OS support.",
-    "videoCallsBetaWarning": "Please note that video calls are currently in beta. They might not work as expected or work at all on all platforms.",
-    "experimentalVideoCalls": "Experimental video calls",
     "youRejectedTheInvitation": "You rejected the invitation",
     "youJoinedTheChat": "You joined the chat",
     "youAcceptedTheInvitation": "👍 You accepted the invitation",
@@ -2769,5 +2765,55 @@
     "unifiedPushDistributors": "Unified Push distributors:",
     "doubleTapToReact": "Double-tap to react",
     "doubleTapToReactDescription": "Double-tap a message to react instead of selecting text",
-    "doubleTapReaction": "Double-tap reaction"
+    "doubleTapReaction": "Double-tap reaction",
+    "shareCrashReports": "Share crash reports",
+    "shareCrashReportsDescription": "Automatically share crash reports with the developers?",
+    "countActiveCallMembers": "{count} active call members",
+    "@countActiveCallMembers": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "enterCall": "Enter call",
+    "videoCallsBetaWarning": "Video calls are a beta feature. There might be bugs or unexpected behavior. We would be happy to hear about your feedback.",
+    "noDevicesFound": "No devices found",
+    "incomingCall": "Incoming call",
+    "videoCall": "Video call",
+    "voiceCall": "Voice call",
+    "missedCall": "Missed call",
+    "callBack": "Call back",
+    "hangUp": "Hang up",
+    "waitingForParticipant": "Waiting for participant...",
+    "decline": "Decline",
+    "startCall": "Start call",
+    "selectCamera": "Select camera",
+    "selectMicrophone": "Select microphone",
+    "selectSpeaker": "Select speaker",
+    "toggleMicrophone": "Toggle microphone",
+    "toggleCamera": "Toggle camera",
+    "startScreensharing": "Start screensharing",
+    "stopScreensharing": "Stop screensharing",
+    "raiseHand": "Raise hand",
+    "stopRaiseHand": "Stop raise hand",
+    "preferSpeaker": "Prefer speaker",
+    "unexpectedErrorOccurded": "Unfortunately, an unexpected error has occurred: {msg}",
+    "@unexpectedErrorOccurded": {
+        "placeholders": {
+            "msg": {"type": "String"}
+        }
+    },
+    "incomingCallFrom": "Incoming call from {user}",
+    "@incomingCallFrom": {
+        "placeholders": {
+            "user": {"type": "String"}
+        }
+    },
+    "serverRespondedWithError": "The server has replied with an error message: {error}",
+    "@serverRespondedWithError": {
+        "placeholders": {
+            "error": {"type": "String"}
+        }
+    }
 }

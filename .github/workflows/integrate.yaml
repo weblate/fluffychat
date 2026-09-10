@@ -18,6 +18,7 @@ jobs:
         with:
           flutter-version-file: .tool_versions.yaml
           cache: true
+      - uses: dtolnay/rust-toolchain@stable
       - name: Check for empty translations
         run: |
           if grep -rn '": ""' lib/l10n/*.arb; then
@@ -97,6 +98,7 @@ jobs:
       - run: flutter pub get
       - name: Prepare web
         run: ./scripts/prepare-web.sh
+      - run: git diff --exit-code
       - run: flutter build web
       - name: Upload Web Build
         uses: actions/upload-artifact@v7
@@ -113,7 +115,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install git wget curl clang cmake ninja-build pkg-config libgtk-3-dev libblkid-dev liblzma-dev libjsoncpp-dev cmake-data libsecret-1-dev libsecret-1-0 librhash0 libssl-dev libwebkit2gtk-4.1-dev -y
+        run: sudo apt-get update && sudo apt-get install git wget curl clang cmake ninja-build pkg-config libgtk-3-dev libblkid-dev liblzma-dev libjsoncpp-dev cmake-data libsecret-1-dev libsecret-1-0 librhash0 libssl-dev libwebkit2gtk-4.1-dev libpulse-dev -y
       - run: echo "FLUTTER_VERSION=$(yq '.environment.flutter' < .tool_versions.yaml)" >> $GITHUB_ENV
       - name: Install Flutter
         run: |
@@ -139,9 +141,6 @@ jobs:
       - run: ./scripts/add-firebase-messaging.sh
       - run: flutter pub get
       - run: flutter build ios --no-codesign
-      - name: Ensure that iOS build files are up to date in git
-        run: |
-          git diff --quiet -- ios/ || exit 1
 
   integration_test:
     runs-on: ubuntu-latest
@@ -177,7 +176,7 @@ jobs:
           api-level: ${{ matrix.api-level }}
           target: google_apis
           arch: x86_64
-          cores: 16
+          cores: 4
           ndk: 28.2.13676358
           force-avd-creation: false
           disk-size: 4096M

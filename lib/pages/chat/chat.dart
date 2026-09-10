@@ -8,7 +8,6 @@ import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:desktop_drop/desktop_drop.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:fluffychat/config/setting_keys.dart';
@@ -23,13 +22,13 @@ import 'package:fluffychat/pages/chat_details/chat_details.dart';
 import 'package:fluffychat/utils/adaptive_bottom_sheet.dart';
 import 'package:fluffychat/utils/error_reporter.dart';
 import 'package:fluffychat/utils/file_selector.dart';
+import 'package:fluffychat/utils/matrix_live_kit_calls/matrix_live_kit_call.dart';
 import 'package:fluffychat/utils/matrix_sdk_extensions/event_extension.dart';
 import 'package:fluffychat/utils/matrix_sdk_extensions/filtered_timeline_extension.dart';
 import 'package:fluffychat/utils/matrix_sdk_extensions/matrix_locals.dart';
 import 'package:fluffychat/utils/other_party_can_receive.dart';
 import 'package:fluffychat/utils/platform_infos.dart';
 import 'package:fluffychat/utils/show_scaffold_dialog.dart';
-import 'package:fluffychat/widgets/adaptive_dialogs/show_modal_action_popup.dart';
 import 'package:fluffychat/widgets/adaptive_dialogs/show_ok_cancel_alert_dialog.dart';
 import 'package:fluffychat/widgets/adaptive_dialogs/show_text_input_dialog.dart';
 import 'package:fluffychat/widgets/future_loading_dialog.dart';
@@ -37,10 +36,10 @@ import 'package:fluffychat/widgets/matrix.dart';
 import 'package:fluffychat/widgets/mxc_image.dart';
 import 'package:fluffychat/widgets/share_scaffold_dialog.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:matrix/matrix.dart';
 import 'package:mime/mime.dart';
 import 'package:pasteboard/pasteboard.dart';
@@ -57,6 +56,7 @@ class ChatPage extends StatelessWidget {
   final List<ShareItem>? shareItems;
   final String? eventId;
   final Timeline? timeline;
+  final String? action;
 
   const ChatPage({
     super.key,
@@ -64,6 +64,7 @@ class ChatPage extends StatelessWidget {
     this.eventId,
     this.shareItems,
     this.timeline,
+    this.action,
   });
 
   @override
@@ -83,11 +84,12 @@ class ChatPage extends StatelessWidget {
     }
 
     return ChatPageWithRoom(
-      key: Key('chat_page_${roomId}_$eventId'),
+      key: Key('chat_page_${roomId}_${eventId}_$action'),
       room: room,
       shareItems: shareItems,
       eventId: eventId,
       timeline: timeline,
+      action: action,
     );
   }
 }
@@ -97,6 +99,7 @@ class ChatPageWithRoom extends StatefulWidget {
   final List<ShareItem>? shareItems;
   final String? eventId;
   final Timeline? timeline;
+  final String? action;
 
   const ChatPageWithRoom({
     super.key,
@@ -104,6 +107,7 @@ class ChatPageWithRoom extends StatefulWidget {
     this.shareItems,
     this.eventId,
     this.timeline,
+    this.action,
   });
 
   @override
@@ -286,7 +290,7 @@ class ChatController extends State<ChatPageWithRoom>
     }
   }
 
-  Future<void> _shareItems([_]) async {
+  Future<void> _shareItems() async {
     final shareItems = widget.shareItems;
     if (shareItems == null || shareItems.isEmpty) return;
     if (!room.otherPartyCanReceiveMessages) {
@@ -394,8 +398,15 @@ class ChatController extends State<ChatPageWithRoom>
     inputFocus.addListener(_inputFocusListener);
 
     _loadDraft();
-    WidgetsBinding.instance.addPostFrameCallback(_shareItems);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _shareItems();
+      _checkMatrixRtcCallSupport();
+      if (widget.action == 'call') {
+        Matrix.of(context).activeCallRoomId.value = room.id;
+      }
+    });
     web.window.addEventListener('paste', _handleClipboardFilePasteWeb);
+
     super.initState();
     _displayChatDetailsColumn = ValueNotifier(
       AppSettings.displayChatDetailsColumn.value,
@@ -419,6 +430,18 @@ class ChatController extends State<ChatPageWithRoom>
         : '';
     WidgetsBinding.instance.addObserver(this);
     _tryLoadTimeline();
+  }
+
+  Future<void> _checkMatrixRtcCallSupport() async {
+    try {
+      final urls = await room.client.getLiveKitServiceUrls();
+      if (urls.isEmpty) return;
+      setState(() {
+        supportLiveKitCalls = true;
+      });
+    } catch (e) {
+      Logs().d('Unable to check MatrixRTC call support', e);
+    }
   }
 
   final Set<String> expandedEventIds = {};
@@ -583,6 +606,13 @@ class ChatController extends State<ChatPageWithRoom>
     final timeline = this.timeline;
     if (timeline == null || timeline.events.isEmpty) return;
 
+    // Do not set read marker on rtc notification while call is active. This
+    // mutes callkit.
+    if (room.hasActiveMatrixRtcCall &&
+        timeline.events.first.type == RtcNotificationContent.eventType) {
+      return;
+    }
+
     final setOnLatestEvent = eventId == null;
     eventId ??= timeline.events
         .firstWhereOrNull(
@@ -604,7 +634,7 @@ class ChatController extends State<ChatPageWithRoom>
     if (eventId.isValidMatrixIdStrict() == false) return;
 
     // Already set a read marker on this event
-    if (room.fullyRead == eventId) return;
+    if (room.fullyRead == eventId && !setOnLatestEvent) return;
 
     // Set a readmarker on a specific event, not latest, but room is not unread
     // at all.
@@ -1242,6 +1272,7 @@ class ChatController extends State<ChatPageWithRoom>
     if (emoji == null) return;
     final text = sendController.text;
     final selection = sendController.selection;
+    final start = selection.baseOffset == -1 ? 0 : selection.baseOffset;
     final newText = sendController.text.isEmpty
         ? emoji.emoji
         : text.replaceRange(selection.start, selection.end, emoji.emoji);
@@ -1249,7 +1280,7 @@ class ChatController extends State<ChatPageWithRoom>
       text: newText,
       selection: TextSelection.collapsed(
         // don't forget an UTF-8 combined emoji might have a length > 1
-        offset: selection.baseOffset + emoji.emoji.length,
+        offset: start + emoji.emoji.length,
       ),
     );
   }
@@ -1397,11 +1428,8 @@ class ChatController extends State<ChatPageWithRoom>
     room.client.getConfig();
 
     switch (choice) {
-      case AddPopupMenuActions.image:
-        sendFileAction(type: FileType.image);
-        return;
-      case AddPopupMenuActions.video:
-        sendFileAction(type: FileType.video);
+      case AddPopupMenuActions.media:
+        sendFileAction(type: FileType.media);
         return;
       case AddPopupMenuActions.file:
         sendFileAction();
@@ -1535,54 +1563,6 @@ class ChatController extends State<ChatPageWithRoom>
   void showEventInfo([Event? event]) =>
       (event ?? selectedEvents.single).showInfoDialog(context);
 
-  Future<void> onPhoneButtonTap() async {
-    // VoIP required Android SDK 21
-    if (PlatformInfos.isAndroid) {
-      final androidInfo = await DeviceInfoPlugin().androidInfo;
-      if (!mounted) return;
-      if (androidInfo.version.sdkInt < 21) {
-        Navigator.pop(context);
-        await showOkAlertDialog(
-          context: context,
-          title: L10n.of(context).unsupportedAndroidVersion,
-          message: L10n.of(context).unsupportedAndroidVersionLong,
-          okLabel: L10n.of(context).close,
-        );
-        return;
-      }
-    }
-    final callType = await showModalActionPopup<CallType>(
-      context: context,
-      title: L10n.of(context).warning,
-      message: L10n.of(context).videoCallsBetaWarning,
-      cancelLabel: L10n.of(context).cancel,
-      actions: [
-        AdaptiveModalAction(
-          label: L10n.of(context).voiceCall,
-          icon: const Icon(Icons.phone_outlined),
-          value: CallType.kVoice,
-        ),
-        AdaptiveModalAction(
-          label: L10n.of(context).videoCall,
-          icon: const Icon(Icons.video_call_outlined),
-          value: CallType.kVideo,
-        ),
-      ],
-    );
-    if (callType == null) return;
-    if (!mounted) return;
-
-    final voipPlugin = Matrix.of(context).voipPlugin;
-    try {
-      await voipPlugin!.voip.inviteToCall(room, callType);
-    } catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(e.toLocalizedString(context))));
-    }
-  }
-
   void cancelReplyEventAction() => setState(() {
     if (editEvent != null) {
       sendController.text = pendingText;
@@ -1591,6 +1571,12 @@ class ChatController extends State<ChatPageWithRoom>
     replyEvent = null;
     editEvent = null;
   });
+
+  void startOrJoinVideoCall() {
+    Matrix.of(context).activeCallRoomId.value = room.id;
+  }
+
+  bool supportLiveKitCalls = false;
 
   Future<void> _cancelEditWithConfirmation() async {
     final originalText = editEvent!
@@ -1670,8 +1656,7 @@ class ChatController extends State<ChatPageWithRoom>
 }
 
 enum AddPopupMenuActions {
-  image,
-  video,
+  media,
   file,
   poll,
   photoCamera,

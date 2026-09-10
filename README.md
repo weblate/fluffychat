@@ -5,8 +5,6 @@ SPDX-FileCopyrightText: 2019-Present Contributors to FluffyChat
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
-![Screenshot](https://github.com/krille-chan/fluffychat/blob/main/assets/banner_transparent.png?raw=true)
-
 [FluffyChat](https://fluffy.chat) is an open source, nonprofit and cute [[matrix](https://matrix.org)] client written in [Flutter](https://flutter.dev). The goal of the app is to create an easy to use instant messenger which is open source and accessible for everyone.
 
 ### Links:
@@ -16,16 +14,17 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 - 📰 [[Mastodon] Get updates on social media](https://troet.cafe/@krille)
 - 💝 [[Liberapay] Support FluffyChat development](https://de.liberapay.com/KrilleChritzelius)
 
-<a href='https://ko-fi.com/C1C86VN53' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi5.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+<a href='https://ko-fi.com/krille' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi5.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
 ### Screenshots:
 
-<img src="https://github.com/krille-chan/fluffychat-website/blob/main/src/assets/screenshots/mobile.png?raw=true" height="300">
-<img src="https://github.com/krille-chan/fluffychat-website/blob/main/src/assets/screenshots/desktop.png?raw=true" height="300">
+<img src="https://github.com/krille-chan/fluffychat-website/blob/main/public/img/screenshot_mobile.png?raw=true" height="300">
+<img src="https://github.com/krille-chan/fluffychat-website/blob/main/public/img/screenshot_desktop.png?raw=true" height="300">
 
 # Features
 
 - 📩 Send all kinds of messages, images and files
+- 🤙 Video calls with Matrix RTC
 - 🎙️ Voice messages
 - 📍 Location sharing
 - 🔔 Push notifications
@@ -33,16 +32,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 - 📣 Public channels with thousands of participants
 - 🛠️ Feature rich group moderation including all matrix features
 - 🔍 Discover and join public groups
-- 🌙 Dark mode
 - 🎨 Material You design
-- 📟 Hides complexity of Matrix IDs behind simple QR codes
 - 😄 Custom emotes and stickers
 - 🌌 Spaces
-- 🔄 Compatible with Element, Nheko, NeoChat and all other Matrix apps
 - 🔐 End to end encryption
 - 🔒 Encrypted chat backup
 - 😀 Emoji verification & cross signing
-
 ... and much more.
 
 
@@ -51,6 +46,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 Please visit the website for installation instructions:
 
 - https://fluffy.chat
+
+# Configuration and Mobile Device Management (MDM)
+
+FluffyChat supports configuration via MDM on Android&iOS (since v2.10.0) and via a config.json file on web. You can see the populated configuration for MDM on Android in this file under `/android/app/src/main/res/xml/app_restrictions.xml`.
+An example configuration can be found in the `config.sample.json` file.
 
 # How to build
 
@@ -131,12 +131,8 @@ flutter test integration_test/mobile_test.dart
 
 * <a href="https://github.com/fabiyamada">Fabiyamada</a> is a graphics designer and has made the fluffychat logo and the banner. Big thanks for her great designs.
 
-* <a href="https://github.com/advocatux">Advocatux</a> has made the Spanish translation with great love and care. He always stands by my side and supports my work with great commitment.
-
-* Thanks to MTRNord and Sorunome for developing.
-
 * Also thanks to all translators and testers! With your help, fluffychat is now available in more than 12 languages.
 
-* <a href="https://github.com/madsrh/WoodenBeaver">WoodenBeaver</a> sound theme for the notification sound.
-
 * The Matrix Foundation for making and maintaining the [emoji translations](https://github.com/matrix-org/matrix-spec/blob/main/data-definitions/sas-emoji.json) used for emoji verification, licensed Apache 2.0
+
+* Special thanks to MTRNord, Sorunome and Advocatux.
