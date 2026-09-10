@@ -165,6 +165,9 @@ jobs:
           FDROID_KEY_PASS: ${{ secrets.FDROID_KEY_PASS }}
           PLAYSTORE_DEPLOY_KEY: ${{ secrets.PLAYSTORE_DEPLOY_KEY }}
         run: ./scripts/prepare-android-release.sh
+      # Because of https://ko-fi.com/post/Why-FluffyChat-is-no-longer-available-on-Android-A-A4E426QCYI
+      - name: Remove Android Auto metadata for Play Store
+        run: sed -i '/Android Auto/,/automotive_app_desc/d' android/app/src/main/AndroidManifest.xml
       - name: Build Android Release
         run: flutter build appbundle --target-platform android-arm,android-arm64
       - name: Get Tag Name
