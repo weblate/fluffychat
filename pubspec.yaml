@@ -116,7 +116,7 @@ flutter:
     - assets/
     - assets/logo/mini/
     - assets/sounds/
-    - assets/vodozemac/
+    - assets/vodozemac/0.8.1/
 
 hooks:
   user_defines:
