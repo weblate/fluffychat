@@ -2824,5 +2824,13 @@
                 "type": "String"
             }
         }
+    },
+    "serverRespondedWithError": "O servidor respondeu cunha mensaxe de erro: {error}",
+    "@serverRespondedWithError": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
     }
 }
