@@ -2824,5 +2824,13 @@
                 "type": "String"
             }
         }
+    },
+    "serverRespondedWithError": "服务器回复了错误消息：{error}",
+    "@serverRespondedWithError": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
     }
 }

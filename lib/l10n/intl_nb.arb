@@ -2811,5 +2811,43 @@
     "startScreensharing": "Start skjermdeling",
     "stopScreensharing": "Avslutt skjermdeling",
     "raiseHand": "Hev hånden",
-    "stopRaiseHand": "Senk hånden"
+    "stopRaiseHand": "Senk hånden",
+    "accountsAndSettings": "Kontoer og innstillinger",
+    "@accountsAndSettings": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "countActiveCallMembers": "{count} aktive samtaledeltakere",
+    "@countActiveCallMembers": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "preferSpeaker": "Prioriter taler",
+    "unexpectedErrorOccurded": "Det oppstod dessverre en uventet feil: {msg}",
+    "@unexpectedErrorOccurded": {
+        "placeholders": {
+            "msg": {
+                "type": "String"
+            }
+        }
+    },
+    "incomingCallFrom": "Innkommende anrop fra {user}",
+    "@incomingCallFrom": {
+        "placeholders": {
+            "user": {
+                "type": "String"
+            }
+        }
+    },
+    "serverRespondedWithError": "Serveren svarte med en feilmelding: {error}",
+    "@serverRespondedWithError": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    }
 }
