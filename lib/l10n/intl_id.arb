@@ -2702,7 +2702,7 @@
         "type": "String",
         "placeholders": {}
     },
-    "undo": "Batalkan",
+    "undo": "Urungkan",
     "@undo": {
         "type": "String",
         "placeholders": {}
@@ -2739,7 +2739,7 @@
     "biometricsDescription": "Dengan autentikasi biometrik, Anda dapat membuka kunci aplikasi dengan wajah atau sidik jari. Kemampuan ini bergantung pada perangkat Anda.",
     "useAppLock": "Gunakan kunci aplikasi",
     "unlockWithBiometrics": "Buka kunci dengan autentikasi biometrik",
-    "resetPin": "Setel ulang PIN",
+    "resetPin": "Atur ulang PIN",
     "forwardCountMessages": "Teruskan {count, plural, =1{satu pesan} other{{count} pesan}}?",
     "@forwardCountMessages": {
         "placeholders": {
@@ -2796,5 +2796,71 @@
     "stopScreensharing": "Hentikan berbagi layar",
     "raiseHand": "Angkat tangan",
     "stopRaiseHand": "Turunkan tangan",
-    "preferSpeaker": "Utamakan pengeras suara"
+    "preferSpeaker": "Utamakan pengeras suara",
+    "accountsAndSettings": "Akun dan pengaturan",
+    "@accountsAndSettings": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "updateAvailable": "Pembaruan {version} tersedia",
+    "@updateAvailable": {
+        "type": "String",
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "download": "Unduh",
+    "pasteImage": "Tempel gambar",
+    "noImageInClipboard": "Tidak ada gambar di papan klip",
+    "senderHasInvitedYouToTheChat": "{sender} telah mengundang Anda ke obrolan '{nameOrAlias}'.",
+    "@senderHasInvitedYouToTheChat": {
+        "placeholders": {
+            "sender": {
+                "type": "String"
+            },
+            "nameOrAlias": {
+                "type": "String"
+            }
+        }
+    },
+    "senderHasInvitedYouToTheSpace": "{sender} telah mengundang Anda ke space '{nameOrAlias}'.",
+    "@senderHasInvitedYouToTheSpace": {
+        "placeholders": {
+            "sender": {
+                "type": "String"
+            },
+            "nameOrAlias": {
+                "type": "String"
+            }
+        }
+    },
+    "unexpectedErrorOccurded": "Sayangnya, telah terjadi kesalahan yang tidak terduga: {msg}",
+    "@unexpectedErrorOccurded": {
+        "placeholders": {
+            "msg": {
+                "type": "String"
+            }
+        }
+    },
+    "incomingCallFrom": "Panggilan masuk dari {user}",
+    "@incomingCallFrom": {
+        "placeholders": {
+            "user": {
+                "type": "String"
+            }
+        }
+    },
+    "serverRespondedWithError": "Server telah membalas dengan pesan kesalahan: {error}",
+    "@serverRespondedWithError": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "sharedLocation": "Lokasi yang dibagikan",
+    "doYouAlsoWantToBlock": "Apakah Anda juga ingin memblokir pengguna ini?",
+    "declineAndBlock": "Tolak dan blokir"
 }
