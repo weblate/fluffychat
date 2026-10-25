@@ -2760,5 +2760,41 @@
             }
         }
     },
-    "toggleMicrophone": "تشغيل/إيقاف الميكروفون"
+    "toggleMicrophone": "تشغيل/إيقاف الميكروفون",
+    "countParticipants": "{count}{count, plural, =1{مشارك واحد} other{{count} مشاركين}}",
+    "@countParticipants": {
+        "type": "String",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "countVotes": "{count, plural, =1{صوت واحد} other{{count} أصوات}}",
+    "@countVotes": {
+        "type": "int",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "countReplies": "{count, plural, =1{رد واحد} other{{count} ردود}}",
+    "@countReplies": {
+        "type": "int",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "forwardCountMessages": "إعادة توجيه {count, plural, =1{رسالة واحدة} other{{count} رسالة}}؟",
+    "@forwardCountMessages": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "videoCallsBetaWarning": "مكالمات الفيديو ميزة تجريبية (بيتا). قد تواجه بعض الأخطاء أو سلوكيات غير متوقعة. يسعدنا تلقّي ملاحظاتك."
 }
