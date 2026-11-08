@@ -2836,5 +2836,31 @@
         }
     },
     "download": "Downloaden",
-    "sharedLocation": "Gedeelde locatie"
+    "sharedLocation": "Gedeelde locatie",
+    "pasteImage": "Afbeelding plakken",
+    "noImageInClipboard": "Geen afbeelding op het klembord",
+    "doYouAlsoWantToBlock": "Wil je deze persoon ook blokkeren?",
+    "declineAndBlock": "Afwijzen en blokkeren",
+    "senderHasInvitedYouToTheChat": "{sender} heeft je uitgenodigd voor de chat '{nameOrAlias}'.",
+    "@senderHasInvitedYouToTheChat": {
+        "placeholders": {
+            "sender": {
+                "type": "String"
+            },
+            "nameOrAlias": {
+                "type": "String"
+            }
+        }
+    },
+    "senderHasInvitedYouToTheSpace": "{sender} heeft je uitgenodigd voor de space '{nameOrAlias}'.",
+    "@senderHasInvitedYouToTheSpace": {
+        "placeholders": {
+            "sender": {
+                "type": "String"
+            },
+            "nameOrAlias": {
+                "type": "String"
+            }
+        }
+    }
 }
