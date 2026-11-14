@@ -2589,7 +2589,7 @@
         "type": "String",
         "placeholders": {}
     },
-    "crop": "Cortar",
+    "crop": "Recortar",
     "@crop": {
         "type": "String",
         "placeholders": {}
@@ -2659,5 +2659,217 @@
     "@openFile": {
         "type": "String",
         "placeholders": {}
+    },
+    "updateAvailable": "Actualización{version}disponible",
+    "@updateAvailable": {
+        "type": "String",
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "download": "Descargar",
+    "resetAccountWarning": "Si restableces tu cuenta, perderás el acceso a tus mensajes antiguos para siempre. Todos tus dispositivos deberán verificarse de nuevo. ¡Realiza esta acción solo si ya no te queda ningún otro dispositivo con el que verificar tu sesión y has perdido tu clave de recuperación y tu frase de contraseña!",
+    "@resetAccountWarning": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "newPassphraseDescription": "FluffyChat usa cifrado de extremo a extremo. Para no perder tus mensajes, elige una frase de contraseña segura que proteja tu identidad criptográfica y la copia de seguridad de tus mensajes cifrados.",
+    "@newPassphraseDescription": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "newPassphrase": "Nueva frase de contraseña",
+    "@newPassphrase": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "repeatPassphrase": "Repita la frase de contraseña",
+    "@repeatPassphrase": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "passphrasesMatch": "Las frases de contraseña coinciden",
+    "@passphrasesMatch": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "passphraseLengthRequirement": "Debe tener al menos 12 caracteres.",
+    "@passphraseLengthRequirement": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "passphraseUpperAndLowerCaseRequirement": "Contiene mayúsculas y minúsculas.",
+    "@passphraseUpperAndLowerCaseRequirement": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "passphraseSpecialCharactersRequirement": "Contiene caracteres especiales.",
+    "@passphraseSpecialCharactersRequirement": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "passphraseNumberRequirement": "Contiene al menos un número.",
+    "@passphraseNumberRequirement": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "storeRecoveryKeyDescription": "Por favor, apunta tu clave de recuperación para poder restaurar tus mensajes cifrados y tu identidad criptográfica.",
+    "@storeRecoveryKeyDescription": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "saveAsFile": "Guardar como archivo",
+    "@saveAsFile": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "youAreReadyToStart": "¡Estás listo para comenzar!",
+    "noUserKeyFound": "No se ha encontrado ninguna clave de usuario",
+    "@noUserKeyFound": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "knownSince": "Visto por primera vez: {date}",
+    "@knownSince": {
+        "type": "String",
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "unsignedDevice": "Dispositivo no firmado",
+    "@unsignedDevice": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "signedDevice": "Dispositivo firmado",
+    "@signedDevice": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "noCurve25519KeyFound": "No se ha encontrado ninguna clave curve25519",
+    "@noCurve25519KeyFound": {
+        "type": "String",
+        "placeholders": {}
+    },
+    "messageNotDecryptable": "No se puede descifrar el mensaje",
+    "today": "Hoy",
+    "sending": "Enviando",
+    "generatingThumbnail": "Generando miniatura",
+    "encrypting": "Cifrando",
+    "uploading": "Subiendo",
+    "edited": "(editado)",
+    "couldNotBeSent": "No se ha podido enviar",
+    "yesterday": "Ayer",
+    "resetRecoveryKey": "Restablecer clave de recuperación",
+    "pleaseEnter6Digits": "Por favor, introduce 6 dígitos para activar el bloqueo de la app.",
+    "disableAppLock": "Desactivar bloqueo de la app",
+    "disableAppLockAreYouSure": "¿Seguro que quieres desactivar el bloqueo de la app?",
+    "enableBiometrics": "Activar autenticación biométrica",
+    "disableBiometrics": "Desactivar autenticación biométrica",
+    "biometricsDescription": "Con la autenticación biométrica puedes desbloquear la app con tu cara o tu huella dactilar. Las opciones disponibles dependen de tu dispositivo.",
+    "useAppLock": "Usar bloqueo de la app",
+    "unlockWithBiometrics": "Desbloquear con autenticación biométrica",
+    "resetPin": "Restablecer PIN",
+    "forwardCountMessages": "¿Reenviar {count, plural, =1{un mensaje} other{{count} mensajes}}?",
+    "@forwardCountMessages": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "loadingMessages": "Cargando mensajes...",
+    "buildDoesNotSupportFirebase": "Esta compilación no admite Firebase Cloud Messaging.",
+    "unableToRegisterDeviceForFirebase": "No se ha podido registrar el dispositivo en Firebase Cloud Messaging.",
+    "unifiedPushDistributors": "Distribuidores de UnifiedPush:",
+    "doubleTapToReact": "Toca dos veces para reaccionar",
+    "doubleTapToReactDescription": "Toca dos veces un mensaje para reaccionar en lugar de seleccionar texto",
+    "doubleTapReaction": "Reacción con doble toque",
+    "shareCrashReports": "Compartir informes de fallos",
+    "shareCrashReportsDescription": "¿Compartir automáticamente los informes de fallos con los desarrolladores?",
+    "countActiveCallMembers": "{count} participantes activos en la llamada",
+    "@countActiveCallMembers": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "enterCall": "Unirse a la llamada",
+    "videoCallsBetaWarning": "Las videollamadas son una función en fase beta. Puede haber errores o comportamientos inesperados. Nos encantaría conocer tu opinión.",
+    "noDevicesFound": "No se han encontrado dispositivos",
+    "incomingCall": "Llamada entrante",
+    "videoCall": "Videollamada",
+    "voiceCall": "Llamada de voz",
+    "missedCall": "Llamada perdida",
+    "callBack": "Devolver la llamada",
+    "hangUp": "Colgar",
+    "waitingForParticipant": "Esperando al participante...",
+    "decline": "Rechazar",
+    "startCall": "Iniciar llamada",
+    "selectCamera": "Seleccionar cámara",
+    "selectMicrophone": "Seleccionar micrófono",
+    "selectSpeaker": "Seleccionar altavoz",
+    "toggleMicrophone": "Activar/desactivar micrófono",
+    "toggleCamera": "Activar/desactivar camara",
+    "startScreensharing": "Compartir pantalla",
+    "stopScreensharing": "Dejar de compartir pantalla",
+    "raiseHand": "Levantar la mano",
+    "stopRaiseHand": "Bajar la mano",
+    "preferSpeaker": "Priorizar a quien habla",
+    "unexpectedErrorOccurded": "Lo sentimos, se ha producido un error inesperado: {msg}",
+    "@unexpectedErrorOccurded": {
+        "placeholders": {
+            "msg": {
+                "type": "String"
+            }
+        }
+    },
+    "incomingCallFrom": "Llamada entrante de {user}",
+    "@incomingCallFrom": {
+        "placeholders": {
+            "user": {
+                "type": "String"
+            }
+        }
+    },
+    "serverRespondedWithError": "El servidor ha respondido con un error: {error}",
+    "@serverRespondedWithError": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "sharedLocation": "Ubicación compartida",
+    "pasteImage": "Pegar imagen",
+    "noImageInClipboard": "No hay imágenes en el portapapeles",
+    "doYouAlsoWantToBlock": "¿También quieres bloquear a este usuario?",
+    "declineAndBlock": "Rechazar y bloquear",
+    "senderHasInvitedYouToTheChat": "{sender} te ha invitado al chat '{nameOrAlias}'.",
+    "@senderHasInvitedYouToTheChat": {
+        "placeholders": {
+            "sender": {
+                "type": "String"
+            },
+            "nameOrAlias": {
+                "type": "String"
+            }
+        }
+    },
+    "senderHasInvitedYouToTheSpace": "{sender} te ha invitado al espacio '{nameOrAlias}'.",
+    "@senderHasInvitedYouToTheSpace": {
+        "placeholders": {
+            "sender": {
+                "type": "String"
+            },
+            "nameOrAlias": {
+                "type": "String"
+            }
+        }
     }
 }
