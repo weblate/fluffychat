@@ -2544,7 +2544,7 @@
             }
         }
     },
-    "editImage": "Editar imagen",
+    "editImage": "Esitar imagen",
     "@editImage": {
         "type": "String",
         "placeholders": {}
