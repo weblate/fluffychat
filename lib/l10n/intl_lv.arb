@@ -2806,5 +2806,31 @@
             }
         }
     },
-    "preferSpeaker": "Priekšroku dot skaļrunim"
+    "preferSpeaker": "Priekšroku dot skaļrunim",
+    "updateAvailable": "Pieejams atjauninājums {version}",
+    "@updateAvailable": {
+        "type": "String",
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "download": "Lejupielādēt",
+    "sharedLocation": "Kopīgota atrašanās vieta",
+    "pasteImage": "Ielīmēt attēlu",
+    "noImageInClipboard": "Starpliktuvē nav attēlu",
+    "doYouAlsoWantToBlock": "Vai vēlies arī liegt šo lietotāju?",
+    "declineAndBlock": "Noraidīt un liegt",
+    "senderMessage": "{sender}: {message}",
+    "@senderMessage": {
+        "placeholders": {
+            "sender": {
+                "type": "String"
+            },
+            "message": {
+                "type": "String"
+            }
+        }
+    }
 }
